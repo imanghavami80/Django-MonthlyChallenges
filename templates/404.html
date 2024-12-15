@@ -1,11 +1,16 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block page_title %}
     404 Error
 {% endblock %}
 
+{% block css_files %}
+	<link rel="stylesheet" href="{% static "404.css" %}">
+{% endblock %}
+
 {% block page_content %}
 	<h1>404 Error</h1>
     <h1>We could not find that page!</h1>
-    <p >Sorry, but we could not find a matching page!</p>
+    <p class="error">Sorry, but we could not find a matching page!</p>
 {% endblock %}
