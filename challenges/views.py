@@ -1,5 +1,6 @@
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from django.urls import reverse
 
 monthly_challenges = {
@@ -34,7 +35,7 @@ def monthly_challenge(request, month):
             'text': challenge_text,
         })
     except KeyError:
-        response_data = '<h1>There is no page for this url!</h1>'
+        response_data = render_to_string('404.html')
         return HttpResponseNotFound(response_data)
 
 
@@ -42,7 +43,7 @@ def monthly_challenge_by_number(request, month):
     months = list(monthly_challenges.keys())
 
     if month > len(months):
-        response_data = '<h1>There is no page for this url!</h1>'
+        response_data = render_to_string('404.html')
         return HttpResponseNotFound(response_data)
 
     redirect_path = reverse('month_challenge', args=[months[month - 1]])
